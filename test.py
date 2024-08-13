@@ -2,6 +2,7 @@ import gymnasium as gym
 import numpy as np
 import pickle
 
+# select which input on which line
 def q_table_line(state, Cosine_of_theta1, Sine_of_theta1, Cosine_of_theta2, Sine_of_theta2, Angular_velocity_of_theta1, Angular_velocity_of_theta2):
     Cosine_of_theta1_tensor = np.digitize((state[0]), Cosine_of_theta1)
     Sine_of_theta1_tensor = np.digitize((state[1]), Sine_of_theta1)
@@ -12,12 +13,14 @@ def q_table_line(state, Cosine_of_theta1, Sine_of_theta1, Cosine_of_theta2, Sine
 
     return Cosine_of_theta1_tensor, Sine_of_theta1_tensor, Cosine_of_theta2_tensor, Sine_of_theta2_tensor, Angular_velocity_of_theta1_tensor, Angular_velocity_of_theta2_tensor
 
+# load the saved Q_tanble
 f = open('Acrobot.pkl', 'rb')
 q_table = pickle.load(f)
 f.close()
 
 env = gym.make('Acrobot-v1', render_mode="human")
 
+# divide the input
 Cosine_of_theta1 = np.linspace(-1, 1, 20) # Between -1 and 1
 Sine_of_theta1 = np.linspace(-1, 1, 20) # Between -1 and 1
 Cosine_of_theta2 = np.linspace(-1, 1, 20) # Between -1 and 1
